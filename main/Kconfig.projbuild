@@ -1,0 +1,52 @@
+menu "Audio Server Configuration"
+
+    config USE_DHCP
+        bool "Use DHCP (auto IP)"
+        default y
+        help
+            Get IP address automatically from router.
+
+    config STATIC_IP
+        string "Static IP Address"
+        default "192.168.1.100"
+        depends on !USE_DHCP
+        help
+            Static IP if DHCP disabled.
+
+    config STATIC_GATEWAY
+        string "Gateway"
+        default "192.168.1.1"
+        depends on !USE_DHCP
+
+    config STATIC_NETMASK
+        string "Netmask"
+        default "255.255.255.0"
+        depends on !USE_DHCP
+
+    config SERVER_PORT
+        int "HTTP Server Port"
+        default 8080
+        range 1 65535
+        help
+            Port for HTTP server.
+
+    config LED_GPIO
+        int "Status LED GPIO (green)"
+        default 2
+        help
+            GPIO for connection status LED.
+
+    config AUDIO_VOLUME
+        int "Audio Volume (0-100)"
+        default 90
+        range 0 100
+        help
+            Audio playback volume.
+
+    config APP_VERSION
+        string "Application Version"
+        default "1.0.0"
+        help
+            Version returned by /health.
+
+endmenu
